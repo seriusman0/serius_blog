@@ -32,6 +32,18 @@ class Post extends Model
                 $query->where('slug', $category);
             });
         });
+
+        // $query->when($filters['author'] ?? false, function($query, $author){
+        //     return $query->whereHas('author', function($query) use ($author){
+        //         $query->where('username', $author);
+        //     });
+        // });
+        
+        $query->when($filters['author'] ?? false, fn($query, $author)=> 
+           $query->whereHas('author', fn($query) =>
+                $query->where('username', $author)
+             )
+        );
     }
 
     public function category()
