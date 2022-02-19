@@ -1,21 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-use App\Http\Controllers\PostController;
-
-use App\Models\Category;
 use App\Models\User;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Models\Category;
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', function () {
     return view('home', [
@@ -44,22 +36,10 @@ Route::get('/categories', function(){
         'title' => 'Post Categories',
         'categories' => Category::all(),
         'active' => 'categories',
-    ]);
-});
-
-// Route::get('categories/{category:slug}', function(Category $category)
-// {
-//     return view('posts', [
-//         'title' => "Post By Category : $category->name",
-//         'posts' => $category->posts->load('author', 'category'),
-//         'active' => "categories", 
-//     ]);
-// });
-
-// Route::get('/authors/{author:username}', function(User $author)
-// {
-//     return view('posts', [
-//         'title' => "Post By Author :  $author->name",
-//         'posts' => $author->posts->load('author', 'category'),
-//     ]);
-// });
+    ]); 
+});                
+    
+Route::get('/login', [LoginController::class, 'index']); 
+Route::post('/login', [LoginController::class, 'authenticate']); 
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
