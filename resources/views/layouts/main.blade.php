@@ -20,11 +20,9 @@
     <title>My Blog | {{ $title }}</title>
   </head>
   <body>
-       
         @include('partials.navbar')
         <div class="container mt-4">
            @yield ('container')
         </div>  
-
-</body>
+  </body>
 </html>

@@ -21,7 +21,6 @@ class DashboardPostController extends Controller
             'posts' => Post::where('user_id', auth()->user()->id)->get()
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -33,7 +32,6 @@ class DashboardPostController extends Controller
             'categories' => Category::all()
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -55,9 +53,7 @@ class DashboardPostController extends Controller
         Post::create($validatedData);
 
         return redirect('/dashboard/posts/')->with('success', 'New Post Has Been Added!');
-
     }
-
     /**
      * Display the specified resource.
      *
@@ -70,7 +66,6 @@ class DashboardPostController extends Controller
             'post' => $post,
         ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -84,7 +79,6 @@ class DashboardPostController extends Controller
             'categories' => Category::all()
         ]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -96,7 +90,6 @@ class DashboardPostController extends Controller
     {
         //
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -108,9 +101,7 @@ class DashboardPostController extends Controller
         Post::destroy($post->id);
 
         return redirect('/dashboard/posts/')->with('success', 'Post Has Been Deleted!');
-
     }
-
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
